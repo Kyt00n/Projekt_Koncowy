@@ -4,11 +4,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WebApplication1.Areas.Identity.Data;
+using WebApplication1.Models;
 
 namespace WebApplication1.Data;
 
 public class WebAplicationDbContext : IdentityDbContext<WebApplication1User>
 {
+    public DbSet<Item> Items { get; set; }
+    public DbSet<OrderItem> ItemOrders { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<Warehouse> Warehouses { get; set; }
     public WebAplicationDbContext(DbContextOptions<WebAplicationDbContext> options)
         : base(options)
     {
