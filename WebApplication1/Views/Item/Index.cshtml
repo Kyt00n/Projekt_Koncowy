@@ -1,0 +1,53 @@
+﻿@model System.Collections.Generic.List<WebApplication1.Models.Item>
+
+@{
+    ViewBag.Title = "title";
+    
+    Layout = "_Layout";
+}
+
+<h2>Inventory</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity In Stock</th>
+            <th>Warehouse ID</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ItemID</td>
+                <td>@item.ItemName</td>
+                <td>@item.Description</td>
+                <td>@item.Price</td>
+                <td>@item.QuantityInStock</td>
+                <td>@item.WarehouseID</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ItemID">Details</a> | 
+                    @* <a asp-action="Edit" asp-route-id="@item.ItemID">Edit</a> | *@
+                    @* <a asp-action="Delete" asp-route-id="@item.ItemID">Delete</a> *@
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No items found.</p>
+}

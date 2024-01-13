@@ -1,0 +1,36 @@
+﻿@model System.Collections.Generic.List<WebApplication1.Models.Warehouse>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Magazyny</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Warehouse ID</th>
+        <th>Warehouse Name</th>
+        <th>Location</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var warehouse in Model)
+    {
+        <tr>
+            <td>@warehouse.WarehouseID</td>
+            <td>@warehouse.WarehouseName</td>
+            <td>@warehouse.Location</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@warehouse.WarehouseID">Details</a> |
+                
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
