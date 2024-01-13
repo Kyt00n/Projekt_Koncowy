@@ -21,10 +21,18 @@ public class WebAplicationDbContext : IdentityDbContext<WebApplication1User>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<Order>()
+            .HasMany(o => o.OrderItems)
+            .WithOne(oi => oi.Order)
+            .HasForeignKey(oi => oi.OrderID);
+
+        builder.Entity<OrderItem>()
+            .HasOne(oi => oi.Item)
+            .WithMany()
+            .HasForeignKey(oi => oi.ItemID);
+
+
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
     }
     private class ApplicationUserEntityConfiguration :
 IEntityTypeConfiguration<WebApplication1User>

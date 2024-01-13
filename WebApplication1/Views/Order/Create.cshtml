@@ -1,0 +1,59 @@
+﻿@model WebApplication1.Models.Order
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Create Order</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="OrderDate">Order Date:</label>
+        <input asp-for="OrderDate" class="form-control" />
+        <span asp-validation-for="OrderDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CustomerName">Customer Name:</label>
+        <input asp-for="CustomerName" class="form-control" />
+        <span asp-validation-for="CustomerName" class="text-danger"></span>
+    </div><h4>Order Items</h4>
+    <div id="orderItemsContainer">
+        <div class="order-item">
+            <div class="form-group">
+                <label asp-for="OrderItems[0].ItemID">Item:</label>
+                <select asp-for="OrderItems[0].ItemID" asp-items="@ViewBag.ItemList" class="form-control">
+                    <option value="">-- Select Item --</option>
+                </select>
+                <span asp-validation-for="OrderItems[0].ItemID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="OrderItems[0].QuantityOrdered">Quantity:</label>
+                <input asp-for="OrderItems[0].QuantityOrdered" class="form-control" />
+                <span asp-validation-for="OrderItems[0].QuantityOrdered" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="addOrderItem()">Add Order Item</button>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <script>
+        var orderItemIndex = 1;
+
+        function addOrderItem() {
+            var template = $('#orderItemsContainer .order-item:first').clone();
+            template.find(':input').val('');
+            template.find('span.field-validation-valid').text('');
+            template.find('[name$="[ItemID]"]').attr('name', 'OrderItems[' + orderItemIndex + '].ItemID');
+            template.find('[name$="[Quantity]"]').attr('name', 'OrderItems[' + orderItemIndex + '].Quantity');
+            $('#orderItemsContainer').append(template);
+            orderItemIndex++;
+        }
+    </script>
+}

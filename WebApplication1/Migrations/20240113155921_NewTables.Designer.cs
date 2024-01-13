@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -11,9 +12,10 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(WebAplicationDbContext))]
-    partial class WebAplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240113155921_NewTables")]
+    partial class NewTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -298,9 +300,6 @@ namespace WebApplication1.Migrations
                     b.Property<int>("ItemID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ItemID1")
-                        .HasColumnType("int");
-
                     b.Property<int>("OrderID")
                         .HasColumnType("int");
 
@@ -310,8 +309,6 @@ namespace WebApplication1.Migrations
                     b.HasKey("OrderItemID");
 
                     b.HasIndex("ItemID");
-
-                    b.HasIndex("ItemID1");
 
                     b.HasIndex("OrderID");
 
@@ -404,14 +401,10 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.OrderItem", b =>
                 {
                     b.HasOne("WebApplication1.Models.Item", "Item")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("ItemID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("WebApplication1.Models.Item", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("ItemID1");
 
                     b.HasOne("WebApplication1.Models.Order", "Order")
                         .WithMany("OrderItems")
