@@ -5,10 +5,10 @@
     Layout = "_Layout";
 }
 
-<h2>Orders</h2>
+<h2>Zamówienia</h2>
 
 <p>
-    <a asp-action="Create">Create New Order</a>
+    <a asp-action="Create">Stwórz nowe zamówienie</a>
 </p>
 
 @if (Model.Any())
@@ -16,10 +16,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Order ID</th>
-                <th>Order Date</th>
-                <th>Customer Name</th>
-                <th>Action</th>
+                <th>Id</th>
+                <th>Data</th>
+                <th>Klient</th>
+                <th>Więcej</th>
             </tr>
         </thead>
         <tbody>
@@ -31,8 +31,7 @@
                     <td>@order.CustomerName</td>
                     <td>
                         <a asp-action="Details" asp-route-id="@order.OrderID">Details</a> |
-                        @* <a asp-action="Edit" asp-route-id="@order.OrderID">Edit</a> | *@
-                        @* <a asp-action="Delete" asp-route-id="@order.OrderID">Delete</a> *@
+                        <a asp-action="Edit" asp-route-id="@order.OrderID">Edit</a> |
                     </td>
                 </tr>
             }

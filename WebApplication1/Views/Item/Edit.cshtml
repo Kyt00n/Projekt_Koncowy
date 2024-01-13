@@ -1,12 +1,12 @@
-﻿@model WebApplication1.Models.Item
+﻿@model Item
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-<h2>Dodaj produkt</h2>
-<form asp-action="Create" method="post">
+<h2>Edytuj produkt</h2>
+<form asp-action="Edit" method="post">
     <div class="form-group">
         <label asp-for="ItemName">Nazwa produktu:</label>
         <input asp-for="ItemName" class="form-control" />
@@ -39,7 +39,7 @@
         <span asp-validation-for="WarehouseID" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
 </form>
 
 <div>

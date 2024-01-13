@@ -1,0 +1,15 @@
+﻿@model Item
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Czy na pewno chcesz usunąć produkt?</h2>
+<div>
+    <h3>@Html.DisplayNameFor(model => model.ItemName)</h3>
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

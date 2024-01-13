@@ -15,12 +15,6 @@ public class ItemController : Controller
         _context = context;
     }
 
-    // //GET: Item
-    // public async Task<IActionResult> Index()
-    // {
-    //     var items = await _context.Items.ToListAsync();
-    //     return View(items);
-    // }
     public async Task<IActionResult> Index(int? warehouseId)
     {
         ViewBag.WarehouseList = new SelectList(_context.Warehouses, "WarehouseID", "WarehouseName");
@@ -37,25 +31,8 @@ public class ItemController : Controller
         return View(items);
     }
 
-    // GET: Item/Details/5
-    public async Task<IActionResult> Details(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-
-        var item = await _context.Items
-            .FirstOrDefaultAsync(m => m.ItemID == id);
-
-        if (item == null)
-        {
-            return NotFound();
-        }
-
-        return View(item);
-    }
-    public IActionResult Create(int? warehouseId)
+    
+    public IActionResult Create()
     {
         ViewBag.WarehouseList = new SelectList(_context.Warehouses, "WarehouseID", "WarehouseName");
 
@@ -70,5 +47,67 @@ public class ItemController : Controller
             _context.Add(item);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+    }
+    // GET: Item/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
+        ViewBag.WarehouseList = new SelectList(_context.Warehouses, "WarehouseID", "WarehouseName");
+
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var item = await _context.Items.FindAsync(id);
+        if (item == null)
+        {
+            return NotFound();
+        }
+
+        return View(item);
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, Item item)
+    {
+        var i = await _context.Items.FindAsync(id);
+
+        
+            i.ItemName = item.ItemName;
+            i.Description = item.Description;
+            i.Price = item.Price;
+            i.QuantityInStock = item.QuantityInStock;
+            i.WarehouseID = item.WarehouseID;
+        
+
+        _context.Update(i);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
+    public async Task<ActionResult> Delete(int id)
+    {
+        if (id == null)
+        {
+            return NotFound();
+        }
+
+        var item = await _context.Items.FindAsync(id);
+        if (item == null)
+        {
+            return NotFound();
+        }
+
+        return View(item);
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Delete(int id, IFormCollection collection)
+    {
+        var item = await _context.Items.FindAsync(id);
+        _context.Items.Remove(item);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+
     }
 }

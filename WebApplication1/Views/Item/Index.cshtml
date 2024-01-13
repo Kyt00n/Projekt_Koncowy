@@ -6,9 +6,9 @@
     Layout = "_Layout";
 }
 
-<h2>Inventory</h2>
+<h2>Produkty</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nowy Produkt</a>
 </p>
 
 
@@ -18,13 +18,13 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Item ID</th>
-            <th>Item Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity In Stock</th>
-            <th>Warehouse ID</th>
-            <th>Action</th>
+            <th>Id</th>
+            <th>Nazwa</th>
+            <th>Opis</th>
+            <th>Cena</th>
+            <th>Ilość</th>
+            <th>Id Magazynu</th>
+            <th>Wiecej</th>
         </tr>
         </thead>
         <tbody>
@@ -38,9 +38,9 @@
                 <td>@item.QuantityInStock</td>
                 <td>@item.WarehouseID</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.ItemID">Details</a> | 
-                    @* <a asp-action="Edit" asp-route-id="@item.ItemID">Edit</a> | *@
-                    @* <a asp-action="Delete" asp-route-id="@item.ItemID">Delete</a> *@
+                    
+                    <a asp-action="Edit" asp-route-id="@item.ItemID">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ItemID">Delete</a> |
                 </td>
             </tr>
         }

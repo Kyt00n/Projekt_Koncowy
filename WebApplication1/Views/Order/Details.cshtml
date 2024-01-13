@@ -5,30 +5,30 @@
     Layout = "_Layout";
 }
 
-<h2>Order Details</h2>
+<h2>Szczegóły Zamówienia</h2>
 
 <div>
     <dl class="row">
-        <dt class="col-sm-2">Order ID</dt>
+        <dt class="col-sm-2">Id</dt>
         <dd class="col-sm-10">@Model.OrderID</dd>
 
-        <dt class="col-sm-2">Order Date</dt>
+        <dt class="col-sm-2">Data</dt>
         <dd class="col-sm-10">@Model.OrderDate.ToShortDateString()</dd>
 
-        <dt class="col-sm-2">Customer Name</dt>
+        <dt class="col-sm-2">Klient</dt>
         <dd class="col-sm-10">@Model.CustomerName</dd>
     </dl>
 </div>
 
-<h4>Order Items</h4>
+<h4>Koszyk</h4>
 @if (Model.OrderItems != null && Model.OrderItems.Any())
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Item ID</th>
-                <th>Item Name</th>
-                <th>Quantity</th>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Ilość</th>
             </tr>
         </thead>
         <tbody>

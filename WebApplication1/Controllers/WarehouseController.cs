@@ -59,4 +59,5 @@ public class WarehouseController : Controller
         return RedirectToAction(nameof(Index));
         
     }
+    
 }

@@ -9,6 +9,7 @@ namespace WebApplication1.Controllers;
 public class OrderController : Controller
 {
     private readonly WebAplicationDbContext _context;
+
     public OrderController(WebAplicationDbContext context)
     {
         _context = context;
@@ -52,12 +53,20 @@ public class OrderController : Controller
     // POST: Order/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create( Order order)
+    public async Task<IActionResult> Create(Order order)
     {
-        
-            _context.Add(order);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-       
+
+        _context.Add(order);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+
     }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        ViewBag.ItemList = new SelectList(_context.Items, "ItemID", "ItemName");
+        var order = await _context.Orders.FirstOrDefaultAsync(x => x.OrderID == id);
+        return View(order);
+    }
+
 }
